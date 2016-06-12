@@ -1,0 +1,311 @@
+<!-- <html lang="en" ng-app="notesApp">
+<head>
+   <meta charset="UTF-8">
+<title>Notes App</title>
+ <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  
+<style>
+.done {
+background-color: blue;
+}
+.pending {
+background-color: red;
+}
+</style>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+<div ng-repeat="note in ctrl.notes" ng-class="ctrl.getNoteClass(note.done)">
+<span class="label"> {{note.label}}</span>
+<span class="assignee" ng-show="note.assignee" ng-bind="note.assignee">
+</span>
+</div>
+<script type="text/javascript">
+angular.module('notesApp', []).controller('MainCtrl', [
+function() {
+var self = this;
+self.notes = [
+{label: 'First Note', done: false, assignee: 'Shyam'},
+{label: 'Second Note', done: false},
+{label: 'Done Note', done: true},
+{label: 'Last Note', done: true, assignee: 'Brad'}
+];
+self.getNoteClass = function(status) {
+	console.log(status);
+return {
+done: status,
+pending: !status
+};
+};
+}]);
+</script>
+</body>
+</html> -->
+
+
+<!-- <html ng-app="notesApp">
+<head><title>Notes App</title></head>
+<body ng-controller="MainCtrl as ctrl">
+<div ng-repeat="(author,note) in ctrl.notes">
+<span class="label"> {{note.label}}</span>
+<span class="author" ng-bind="author"></span>
+<span class="label"> {{note.$$hashKey}}</span>
+</div>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script type="text/javascript">
+angular.module('notesApp', [])
+.controller('MainCtrl', [function() {
+var self = this;
+self.notes = {
+shyam: {
+id: 1,
+label: 'First Note',
+done: false
+},
+Misko: {
+id: 3,
+label: 'Finished Third Note',
+done: true
+},
+brad: {
+id: 2,
+label: 'Second Note',
+done: false
+}
+};
+}]);
+</script>
+</body>
+</html> -->
+
+
+
+<!-- <html ng-app="notesApp">
+<body ng-controller="MainCtrl as ctrl">
+<table>
+<tr ng-repeat-start="note in ctrl.notes">
+<td>{{note.label}}</td>
+</tr>
+<tr ng-repeat-end>
+<td>Done: {{note.done}}</td>
+</tr>
+</table>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script type="text/javascript">
+angular.module('notesApp', [])
+.controller('MainCtrl', [function() {
+var self = this;
+self.notes = [
+{id: 1, label: 'First Note', done: false},
+{id: 2, label: 'Second Note', done: false},
+{id: 3, label: 'Finished Third Note', done: true}
+];
+}]);
+</script>
+</body>
+</html> -->
+
+
+
+<!-- <html ng-app="notesApp">
+<head><title>Notes App</title></head>
+<body ng-controller="MainCtrl as ctrl">
+<form ng-submit="ctrl.submit1()">
+<input type="text" ng-model="ctrl.username">
+<input type="password" ng-model="ctrl.password">
+<input type="submit" value="Submit">
+</form>
+<form ng-submit="ctrl.submit2()">
+<input type="text" ng-model="ctrl.user.username">
+<input type="password" ng-model="ctrl.user.password">
+<input type="submit" value="Submit">
+</form>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script type="text/javascript">
+angular.module('notesApp', [])
+.controller('MainCtrl', [function() {
+var self = this;
+self.submit1 = function() {
+// Create user object to send to the server
+var user = {username: self.username, password: self.password};
+console.log('First form submit with ', user);
+};
+self.submit2 = function() {
+console.log('Second form submit with ', self.user);
+};
+}]);
+</script>
+</body>
+</html> -->
+
+<!-- <html ng-app="notesApp">
+<head>
+<title>Notes App</title>
+<style>
+.username.ng-valid {
+background-color: green;
+}
+.username.ng-dirty.ng-invalid-required {
+background-color: red;
+}
+.username.ng-dirty.ng-invalid-minlength {
+background-color: yellow;
+}
+</style>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+<form ng-submit="ctrl.submit()" name="myForm">
+<input type="text" class="username" name="uname" ng-model="ctrl.user.username" required ng-minlength="4">
+<input type="submit" value="Submit" ng-disabled="myForm.$invalid">
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script type="text/javascript">
+angular.module('notesApp', [])
+.controller('MainCtrl', [function() {
+var self = this;
+self.submit = function() {
+console.log('User clicked submit with ', self.user);
+};
+}]);
+</script>
+</body>
+</html> -->
+
+<!-- <html ng-app="notesApp">
+<head><title>Notes App</title>
+<style type="text/css">
+	.error.ng-dirty.ng-invalid-minlength{
+		background-color: red;
+	}
+	.error.ng-dirty.ng-invalid-required{
+background-color: yellow;
+	}
+</style>
+</head>
+<body ng-controller="MainCtrl">
+<form ng-submit="submit()" name="myForm">
+<input type="text" name="uname" class ="error" ng-model="user.username" ng-minlength="4" required >
+<input type="password" name="pwd" class = "error"ng-model="user.password"  required>
+<input type="date" name="dob"placeholder="Date Of Birth"
+ng-model="ctrl.user.profile.dob">
+<input type="submit" value="Submit" ng-disabled="myForm.$invalid">
+</form>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script type="text/javascript">
+angular.module('notesApp', [])
+.controller('MainCtrl',['$scope',function($scope) {
+$scope.submit = function() {
+console.log('User clicked submit with ', $scope.user);
+};
+}]);
+</script>
+</body>
+</html> -->
+
+
+<!-- <html ng-app="notesApp">
+<body ng-controller="MainCtrl as mainCtrl">
+<h1>Hello Services!</h1>
+<button ng-click="mainCtrl.logStuff()">Log something</button>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script type="text/javascript">
+angular.module('notesApp', [])
+.controller('MainCtrl', ['$log', function($logg) {
+var self = this;
+self.logStuff = function() {
+$logg.log('The button was pressed');
+};
+}])
+</script>
+</body>
+</html>
+ -->
+
+<html ng-app="notesApp">
+<body ng-controller="MainCtrl as mainCtrl">
+<h1>Hello Controllers!</h1>
+<button ng-click="mainCtrl.open('first')">
+Open First
+</button>
+<button ng-click="mainCtrl.open('second')">
+Open Second
+</button>
+<div ng-switch on="mainCtrl.tab">
+<div ng-switch-when="first">
+<div ng-controller="SubCtrl as ctrl">
+<h3>First tab</h3>
+<ul>
+<li ng-repeat="item in ctrl.list()">
+<span ng-bind="item.label"></span>
+</li>
+</ul>
+<div ng-show>asaddddfdfsdf</div>
+<button ng-click="ctrl.add()">
+Add More Items
+</button>
+<button ng-click = "ctrl.sub()"> del item</button>
+</div>
+</div>
+<div ng-switch-when="second">
+<div ng-controller="SubCtrl as ctrl">
+<h3>Second tab</h3>
+<ul>
+<li ng-repeat="item in ctrl.list()">
+<span ng-bind="item.label"></span>
+</li>
+</ul>
+<button ng-click="ctrl.add()">
+Add More
+</button>
+<button ng-click = "ctrl.sub()"> del item</button>
+</div>
+</div>
+</div>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script src="app.js"></script>
+</body>
+</html>
+
+<!-- <html ng-app ="Noteapp">
+<head>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+</head>
+<body ng-controller= "ctrl">
+<h1> Controller </h1>
+	<button ng-click="open('first')">first</button>
+	<button ng-click="open('second')">second</button>
+<div ng-switch on="tab">
+ <div ng-switch-when="first">
+   <h1> first</h1>
+ </div> 
+ <div ng-switch-when="second">
+   <h1> second</h1>
+ </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+var app =angular.module('Noteapp',[]);
+app.controller('ctrl',["$scope",function($scope){
+$scope.tab ="first";
+$scope.open=function(tb){
+ $scope.tab= tb;
+}; 
+
+}]);
+
+</script> -->
